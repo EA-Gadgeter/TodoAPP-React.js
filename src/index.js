@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {App} from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render (
+    // App no es un atributo, ES UN COMPONENTE
+    // lo cual identificamos gracias a las mayúsculas
+
+    // Podemos agregar propiedades a nuestros componentes
+    // que usamos en el archivo del componente, es decir,
+    // en App.js
+
+    /*<App saludo="Buenas" />*/
+
+    // Otra de forma de hacerlo, es la propiedad Children
+    <App/>,
+)
