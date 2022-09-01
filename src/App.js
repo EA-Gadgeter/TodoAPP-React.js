@@ -4,7 +4,7 @@ import {TodoSearch} from "./TodoSearch";
 import {TodoList} from "./TodoList";
 import {CreateTodoButton} from "./CreateTodoButton";
 import {TodoItem} from "./TodoItem";
-// import './App.css';
+import './App.css';
 
 const todos = [
     {text: "Cortar cebolla", completed: false},
@@ -34,16 +34,22 @@ function App() {
             proporciona React o también podemos usar etiquetas vacías
         */
         <React.Fragment>
-            <TodoCounter />
-            <TodoSearch />
-            <TodoList>
-                {todos.map(todo => (
-                    /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
-                    * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
-                    <TodoItem key={todo.text} text={todo.text}/>
-                ))}
-            </TodoList>
-            <CreateTodoButton/>
+            <main>
+                <div className="container">
+                    <div className="search-bar">
+                        <TodoCounter />
+                        <TodoSearch />
+                    </div>
+                    <TodoList>
+                        {todos.map(todo => (
+                            /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
+                            * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
+                            <TodoItem key={todo.text} text={todo.text}/>
+                        ))}
+                    </TodoList>
+                    <CreateTodoButton/>
+                </div>
+            </main>
         </React.Fragment>
     );
 }
