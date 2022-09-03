@@ -1,0 +1,37 @@
+.TodoItem {
+    width: 90%;
+    height: 3.5rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 2rem;
+    margin-bottom: 1.5rem;
+
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: 0 0.1rem 0.2rem;
+}
+
+.TodoItem-text {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.TodoItem-text--completed {
+    text-decoration: line-through;
+}
+
+.Icon {
+    cursor: pointer;
+}
+
+/*Nos permite cambiarle el color a una imagen*/
+.Icon--completed {
+    filter: opacity(0.4) drop-shadow(0 0 0 green);
+}
+
+.Icon--delete:hover {
+    filter: opacity(0.7) drop-shadow(0 0 0 red);
+}

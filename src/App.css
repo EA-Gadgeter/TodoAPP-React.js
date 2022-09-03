@@ -33,6 +33,7 @@ main {
     background-color: #567c7c;
 
     border-radius: 1.5rem;
+    box-shadow: 0 0.1rem 0.2rem;
 
     margin-bottom: 1.5rem;
     padding: 0.8rem;

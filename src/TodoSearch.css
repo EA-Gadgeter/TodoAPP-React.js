@@ -10,6 +10,7 @@
 
     border: none;
     border-radius: 2rem;
+    box-shadow: 0 0.25rem 0.3rem;
 }
 
 .TodoSearch:focus {

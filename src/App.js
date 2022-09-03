@@ -44,7 +44,11 @@ function App() {
                         {todos.map(todo => (
                             /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
                             * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
-                            <TodoItem key={todo.text} text={todo.text}/>
+                            <TodoItem
+                                key={todo.text}
+                                text={todo.text}
+                                complete={todo.completed}
+                            />
                         ))}
                     </TodoList>
                     <CreateTodoButton/>

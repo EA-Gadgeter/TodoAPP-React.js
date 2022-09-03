@@ -1,8 +1,11 @@
 import React from "react";
+import "./TodoItem.css"
+import logoDelete from "./img/delete.png";
+import logoCheck from "./img/check.png"
 
 function TodoItem(props) {
     return (
-        <li>
+        <li className="TodoItem">
 
             {/*
                 Recordemos que TodoList es un <section>
@@ -15,9 +18,22 @@ function TodoItem(props) {
                 props, que es la tarea en sí.
             */}
 
-            <span>C</span>
-            <p>{props.text}</p>
-            <span>X</span>
+            {/*Gracias a JSX podemos agregar condicionales al agregar
+                condicionales a la hora de agregar clases, lo siguiente lo
+                podemos leer como: si props.complete es verdadero, agrega la
+                clase Icon--completed*/}
+            <img
+
+                className={`Icon ${props.complete && "Icon--completed"}`}
+                src={logoCheck}
+                alt="check logo"/>
+            <p className={`TodoItem-text ${props.complete && "TodoItem-text--completed"}`}>
+                {props.text}
+            </p>
+            <img
+                className={`Icon Icon--delete`}
+                src={logoDelete}
+                alt="delete logo"/>
         </li>
     );
 }
