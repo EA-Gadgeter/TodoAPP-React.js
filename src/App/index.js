@@ -1,21 +1,37 @@
 import React from "react";
 import {AppUI} from "./AppUI";
 
-const defaultTodos = [
+/*const defaultTodos = [
     {text: "Cortar cebolla", isCompleted: true},
     {text: "Terminar curso de ES6+", isCompleted: false},
     {text: "Ver anime", isCompleted: false},
-]
+]*/
 
 // El que "Index" empiece con mayúsculas, indica que es un componente
 function App() {
+
+    // Obtenemos los datos del localStorage
+    const localStorageTodos = localStorage.getItem("TODOS_V1");
+
+    /* Puede que es la primera vez que el usuario usa la app
+    para eso creamos la variable parsedTodos y el condicional de abajo.*/
+    let parsedTodos;
+    if (!localStorageTodos) {
+        // Si no hay registro del item, nosotros lo creamos pasando una lista vacía
+        localStorage.setItem("TODOS_V1", JSON.stringify([]));
+        parsedTodos = []; // parsedTodos sera una lista vacía
+    } else {
+        // Si hay registro, eso es lo que guardamos en parsedTodos
+        parsedTodos = JSON.parse(localStorageTodos);
+    }
 
     /*
         searchValue es el valor de nuestro estado
         setSearchValue es la función para actualizar el estado
     */
     const [searchValue, setSearchValue] = React.useState("");
-    const [todos, setTodos] = React.useState(defaultTodos);
+    // Pasamos parsedTodos como el estado por defecto
+    const [todos, setTodos] = React.useState(parsedTodos);
 
      /*
         Para poder saber la cantidad de Todos que están completos, podemos
@@ -48,6 +64,12 @@ function App() {
         });
     }
 
+    // Función que además de actualizar el estado de los Todos, actualiza el localStorage
+    const saveTodos = (newTodos) => {
+        setTodos(newTodos);
+        localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
+    }
+
     /*
         IMPORTANTE
 
@@ -58,9 +80,9 @@ function App() {
         En el siguiente caso, SI que cambia el estado...
     */
 
-    // Funcion que busca Todos por el texto de la tarea, para completarlos
+    // Función que busca Todos por el texto de la tarea, para completarlos
     const completeTodo = (todoText) => {
-        // Buscamos el índice de la tarea por su texto, es un parametro de la funcion
+        // Buscamos el índice de la tarea por su texto, es un parámetro de la función
         const todoIndex = todos.findIndex(todo => todo.text === todoText);
 
         /*
@@ -70,8 +92,8 @@ function App() {
         const newTodos = [...todos];
 
         newTodos[todoIndex].isCompleted =  true; // Hacemos el cambio en la tarea a eliminar.
-        // Cambiamos el estado de los Todos con la nueva lista
-        setTodos(newTodos);
+        // Guardamos el estado de los Todos con la nueva lista
+        saveTodos(newTodos);
     }
 
     const deleteTodo = (todoText) => {
@@ -80,8 +102,8 @@ function App() {
         const todoIndex = todos.findIndex(todo => todo.text === todoText);
         const newTodos = [...todos];
 
-        newTodos.splice(todoIndex, 1);
-        setTodos(newTodos);
+        newTodos.splice(todoIndex, 1); // Solo borra 1
+        saveTodos(newTodos);
     }
 
     return (
