@@ -1,5 +1,6 @@
 import React from "react";
 import {AppUI} from "./AppUI";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 /*const defaultTodos = [
     {text: "Cortar cebolla", isCompleted: true},
@@ -7,31 +8,18 @@ import {AppUI} from "./AppUI";
     {text: "Ver anime", isCompleted: false},
 ]*/
 
-// El que "Index" empiece con mayúsculas, indica que es un componente
+// El que "App" empiece con mayúsculas, indica que es un componente
 function App() {
 
-    // Obtenemos los datos del localStorage
-    const localStorageTodos = localStorage.getItem("TODOS_V1");
-
-    /* Puede que es la primera vez que el usuario usa la app
-    para eso creamos la variable parsedTodos y el condicional de abajo.*/
-    let parsedTodos;
-    if (!localStorageTodos) {
-        // Si no hay registro del item, nosotros lo creamos pasando una lista vacía
-        localStorage.setItem("TODOS_V1", JSON.stringify([]));
-        parsedTodos = []; // parsedTodos sera una lista vacía
-    } else {
-        // Si hay registro, eso es lo que guardamos en parsedTodos
-        parsedTodos = JSON.parse(localStorageTodos);
-    }
+    /* Para evitar otro tipo de lógica que no sea manejar el estado de la aplicación
+    creamos un Custom Hook para ello, ir al archivo para más info */
+    const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
 
     /*
         searchValue es el valor de nuestro estado
         setSearchValue es la función para actualizar el estado
     */
     const [searchValue, setSearchValue] = React.useState("");
-    // Pasamos parsedTodos como el estado por defecto
-    const [todos, setTodos] = React.useState(parsedTodos);
 
      /*
         Para poder saber la cantidad de Todos que están completos, podemos
@@ -62,12 +50,6 @@ function App() {
             const searchText = searchValue.toLowerCase();
             return todoText.startsWith(searchText);
         });
-    }
-
-    // Función que además de actualizar el estado de los Todos, actualiza el localStorage
-    const saveTodos = (newTodos) => {
-        setTodos(newTodos);
-        localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
     }
 
     /*
