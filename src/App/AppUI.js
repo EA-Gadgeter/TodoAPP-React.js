@@ -1,19 +1,20 @@
 import React from "react";
-import {TodoCounter} from "./TodoCounter";
-import {TodoSearch} from "./TodoSearch";
-import {TodoList} from "./TodoList";
-import {CreateTodoButton} from "./CreateTodoButton";
-import {TodoItem} from "./TodoItem";
+import {TodoCounter} from "../TodoCounter";
+import {TodoSearch} from "../TodoSearch";
+import {TodoList} from "../TodoList";
+import {TodoItem} from "../TodoItem";
+import {CreateTodoButton} from "../CreateTodoButton";
 import './App.css';
 
-const todos = [
-    {text: "Cortar cebolla", completed: false},
-    {text: "Terminar curso de ES6+", completed: false},
-    {text: "Ver anime", completed: false},
-]
-
-// El que "App" empiece con mayúsculas, indica que es un componente
-function App() {
+function AppUI({
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    completeTodo,
+    deleteTodo
+}) {
     return (
         /*
             ¿Cuál es la diferencia entre un elemento y una etiqueta HTML?
@@ -37,17 +38,28 @@ function App() {
             <main>
                 <div className="container">
                     <div className="search-bar">
-                        <TodoCounter />
-                        <TodoSearch />
+                        <TodoCounter
+                            totalTodos={totalTodos}
+                            completedTodos={completedTodos}
+                        />
+                        <TodoSearch
+                            searchValue={searchValue}
+                            setSearchValue={setSearchValue}
+                        />
                     </div>
                     <TodoList>
-                        {todos.map(todo => (
+                        {/* En lugar de recorrer e insertar la lista de todos los Todos,
+                        lo hacemos con los de searchedTodos, que es la que varía según
+                        se va escribiendo*/}
+                        {searchedTodos.map(todo => (
                             /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
                             * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
                             <TodoItem
                                 key={todo.text}
                                 text={todo.text}
-                                complete={todo.completed}
+                                isCompleted={todo.isCompleted}
+                                completeTodo={() => completeTodo(todo.text)}
+                                deleteTodo={() => deleteTodo(todo.text)}
                             />
                         ))}
                     </TodoList>
@@ -58,4 +70,4 @@ function App() {
     );
 }
 
-export {App};
+export {AppUI};

@@ -1,9 +1,10 @@
 import React from "react";
 import "./TodoItem.css"
-import logoDelete from "./img/delete.png";
-import logoCheck from "./img/check.png"
+import logoDelete from "../assets/img/delete.png";
+import logoCheck from "../assets/img/check.png"
 
-function TodoItem(props) {
+function TodoItem({text, isCompleted, completeTodo, deleteTodo}) {
+
     return (
         <li className="TodoItem">
 
@@ -20,20 +21,24 @@ function TodoItem(props) {
 
             {/*Gracias a JSX podemos agregar condicionales al agregar
                 condicionales a la hora de agregar clases, lo siguiente lo
-                podemos leer como: si props.complete es verdadero, agrega la
+                podemos leer como: si isCompleted es verdadero, agrega la
                 clase Icon--completed*/}
             <img
 
-                className={`Icon ${props.complete && "Icon--completed"}`}
+                className={`Icon ${isCompleted && "Icon--completed"}`}
                 src={logoCheck}
-                alt="check logo"/>
-            <p className={`TodoItem-text ${props.complete && "TodoItem-text--completed"}`}>
-                {props.text}
+                alt="check logo"
+                onClick={completeTodo}
+            />
+            <p className={`TodoItem-text ${isCompleted && "TodoItem-text--completed"}`}>
+                {text}
             </p>
             <img
                 className={`Icon Icon--delete`}
                 src={logoDelete}
-                alt="delete logo"/>
+                alt="delete logo"
+                onClick={deleteTodo}
+            />
         </li>
     );
 }
