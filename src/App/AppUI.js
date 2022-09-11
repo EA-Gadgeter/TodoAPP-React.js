@@ -1,20 +1,16 @@
 import React from "react";
+
+import {TodoContext} from "../context";
+
 import {TodoCounter} from "../components/TodoCounter";
 import {TodoSearch} from "../components/TodoSearch";
 import {TodoList} from "../components/TodoList";
 import {TodoItem} from "../components/TodoItem";
 import {CreateTodoButton} from "../components/CreateTodoButton";
+
 import './App.css';
 
-function AppUI({
-    totalTodos,
-    completedTodos,
-    searchValue,
-    setSearchValue,
-    searchedTodos,
-    completeTodo,
-    deleteTodo
-}) {
+function AppUI() {
     return (
         /*
             ¿Cuál es la diferencia entre un elemento y una etiqueta HTML?
@@ -38,31 +34,36 @@ function AppUI({
             <main>
                 <div className="container">
                     <div className="search-bar">
-                        <TodoCounter
-                            totalTodos={totalTodos}
-                            completedTodos={completedTodos}
-                        />
-                        <TodoSearch
-                            searchValue={searchValue}
-                            setSearchValue={setSearchValue}
-                        />
+                        <TodoCounter/>
+                        <TodoSearch/>
                     </div>
-                    <TodoList>
-                        {/* En lugar de recorrer e insertar la lista de todos los Todos,
-                        lo hacemos con los de searchedTodos, que es la que varía según
-                        se va escribiendo*/}
-                        {searchedTodos.map(todo => (
-                            /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
-                            * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
-                            <TodoItem
-                                key={todo.text}
-                                text={todo.text}
-                                isCompleted={todo.isCompleted}
-                                completeTodo={() => completeTodo(todo.text)}
-                                deleteTodo={() => deleteTodo(todo.text)}
-                            />
-                        ))}
-                    </TodoList>
+                    {/*Importamos el contexto, y en lugar de poner nuestros componentes
+                    tal cual, primero usamos TodoContext. Consumer, dentro creamos una función
+                     anónima que precisamente va a consumir los values que declaramos en el contexto
+
+                     Los values a consumir se pasan en un objeto como parámetro, dentro de la función
+                     ahora si ponemos nuestros componentes
+                     */}
+                    <TodoContext.Consumer>
+                        {({searchedTodos, completeTodo, deleteTodo}) => (
+                            <TodoList>
+                                {/* En lugar de recorrer e insertar la lista de todos los Todos,
+                                lo hacemos con los de searchedTodos, que es la que varía según
+                                se va escribiendo*/}
+                                {searchedTodos.map(todo => (
+                                    /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
+                                    * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
+                                    <TodoItem
+                                        key={todo.text}
+                                        text={todo.text}
+                                        isCompleted={todo.isCompleted}
+                                        completeTodo={() => completeTodo(todo.text)}
+                                        deleteTodo={() => deleteTodo(todo.text)}
+                                    />
+                                ))}
+                            </TodoList>
+                        )}
+                    </TodoContext.Consumer>
                     <CreateTodoButton/>
                 </div>
             </main>
