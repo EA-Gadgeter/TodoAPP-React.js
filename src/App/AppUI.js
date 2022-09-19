@@ -21,7 +21,7 @@ function AppUI() {
      */
     }
 
-    const {searchedTodos, completeTodo, deleteTodo} = React.useContext(TodoContext);
+    const {searchedTodos, completeTodo, deleteTodo, openModal, setOpenModal} = React.useContext(TodoContext);
 
     return (
         /*
@@ -65,7 +65,9 @@ function AppUI() {
                             />
                         ))}
                     </TodoList>
-                    <CreateTodoButton/>
+                    <CreateTodoButton
+                        setOpenModal={setOpenModal}
+                    />
                 </div>
             </main>
         </React.Fragment>

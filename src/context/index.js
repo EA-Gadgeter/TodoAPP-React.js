@@ -18,6 +18,7 @@ function TodoProvider (props){
         setSearchValue es la función para actualizar el estado
     */
     const [searchValue, setSearchValue] = React.useState("");
+    const [openModal, setOpenModal]  = React.useState(false);
 
     /*
        Para poder saber la cantidad de Todos que están completos, podemos
@@ -76,6 +77,17 @@ function TodoProvider (props){
         saveTodos(newTodos);
     }
 
+    const addTodo = (todoText) => {
+      const newTodos = [...todos];
+
+      newTodos.push({
+          text: todoText,
+          isCompleted: false
+      });
+
+      saveTodos(newTodos);
+    };
+
     const deleteTodo = (todoText) => {
         // Aquí también cambia el estado, ya que la lista de Todos se ve modificado al
         // eliminar uno, por lo que tenemos que usar setTodos
@@ -98,7 +110,10 @@ function TodoProvider (props){
                 setSearchValue,
                 searchedTodos,
                 completeTodo,
-                deleteTodo
+                addTodo,
+                deleteTodo,
+                openModal,
+                setOpenModal
             }}
         >
             {/*La siguiente línea es muy importante, es lo que nos permite
