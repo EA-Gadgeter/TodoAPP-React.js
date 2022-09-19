@@ -2,14 +2,15 @@ import React from "react";
 import {TodoContext} from "../../context";
 import "./TodoForm.css";
 
-function TodoForm() {
+function TodoForm({labelText, placeholderText, submitText}) {
 
-    const {addTodo, setOpenModal} = React.useContext(TodoContext);
+    const {addTodo, openModal, setOpenModal, openChangeModal, setOpenChangeModal, changeTodo} = React.useContext(TodoContext);
 
     const [newTodoValue, setNewTodoValue] = React.useState("");
 
     const cancelTodoSubmit = () => {
-        setOpenModal(false);
+        if(openModal) setOpenModal(false);
+        if(openChangeModal != "") setOpenChangeModal("");
     };
 
     const changeTodoSubmit = (event) => {
@@ -18,15 +19,23 @@ function TodoForm() {
 
     const submitTodo = (event) => {
         event.preventDefault();
-        addTodo(newTodoValue);
-        setOpenModal(false);
+        if(openModal) {
+            addTodo(newTodoValue);
+            setOpenModal(false);
+        } 
+
+        if (openChangeModal != "") {
+            changeTodo(openChangeModal, newTodoValue);
+            setOpenChangeModal("");
+        }
+        
     }
 
     return(
         <form onSubmit={submitTodo}>
-            <label>Añade un Todo!</label>
+            <label>{labelText}</label>
             <textarea
-                placeholder="Crea tu primer TODO..."
+                placeholder={placeholderText}
                 value={newTodoValue}
                 onChange={changeTodoSubmit}
             />
@@ -42,7 +51,7 @@ function TodoForm() {
                     type="submit"
                     className="TodoForm-button TodoForm-button--submit"
                 >
-                    Añadir TODO
+                    {submitText}
                 </button>
             </div>
         </form>

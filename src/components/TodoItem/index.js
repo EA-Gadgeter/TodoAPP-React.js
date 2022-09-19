@@ -1,9 +1,14 @@
 import React from "react";
 import "./TodoItem.css"
 import logoDelete from "../../assets/img/delete.png";
-import logoCheck from "../../assets/img/check.png"
+import logoCheck from "../../assets/img/check.png";
+import logoChange from "../../assets/img/change.png";
 
-function TodoItem({text, isCompleted, completeTodo, deleteTodo}) {
+function TodoItem({text, isCompleted, completeTodo, deleteTodo, setOpenChangeModal}) {
+
+    const changeClick = () => {
+        setOpenChangeModal(text);
+    }
 
     return (
         <li className="TodoItem">
@@ -25,7 +30,7 @@ function TodoItem({text, isCompleted, completeTodo, deleteTodo}) {
                 clase Icon--completed*/}
             <img
 
-                className={`Icon ${isCompleted && "Icon--completed"}`}
+                className={`Icon Icon--complete ${isCompleted && "Icon--completed"}`}
                 src={logoCheck}
                 alt="check logo"
                 onClick={completeTodo}
@@ -33,12 +38,20 @@ function TodoItem({text, isCompleted, completeTodo, deleteTodo}) {
             <p className={`TodoItem-text ${isCompleted && "TodoItem-text--completed"}`}>
                 {text}
             </p>
-            <img
-                className={`Icon Icon--delete`}
-                src={logoDelete}
-                alt="delete logo"
-                onClick={deleteTodo}
-            />
+            <div className="Icon__modify-options">
+                <img
+                    className={`Icon Icon--delete`}
+                    src={logoDelete}
+                    alt="delete logo"
+                    onClick={deleteTodo}
+                />
+                <img
+                    className={`Icon Icon--change`}
+                    src={logoChange}
+                    alt="change logo"
+                    onClick={changeClick}
+                />
+            </div>
         </li>
     );
 }

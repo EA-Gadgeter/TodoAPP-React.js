@@ -1,50 +1,54 @@
 .CreateTodoButton {
-    width: 5rem;
-    height: 5rem;
+  width: 5rem;
+  height: 5rem;
 
-    font-size: 2.7rem;
-    font-weight: 700;
+  font-size: 2.7rem;
+  font-weight: 700;
 
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 0 0.5rem;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0.5rem;
 
-    position: fixed;
-    bottom: calc(5%);
-    z-index: 1;
+  position: fixed;
+  bottom: calc(5%);
+  z-index: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    transform: rotate(0);
-    transition: .3s ease;
+  transform: rotate(0);
+  transition: 0.3s ease;
 }
+
+.ActiveTodoButton {
+  z-index: 1;
+}
+
 .CreateTodoButton:hover {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
-@media (min-width: 350px){
-    .CreateTodoButton{
-        bottom: calc(8%);
-    }
+@media (min-width: 350px) {
+  .CreateTodoButton {
+    bottom: calc(8%);
+  }
 }
 
-@media (min-width: 630px){
-    .CreateTodoButton{
-        bottom: calc(9%);
-    }
+@media (min-width: 630px) {
+  .CreateTodoButton {
+    bottom: calc(9%);
+  }
 }
 
 @media (min-width: 1024px) {
-    .CreateTodoButton{
-        bottom: calc(10.5%);
-    }
+  .CreateTodoButton {
+    bottom: calc(10.5%);
+  }
 }
 
-
 @media (min-width: 1300px) {
-    .CreateTodoButton{
-        bottom: calc(14%);
-    }
+  .CreateTodoButton {
+    bottom: calc(14%);
+  }
 }
