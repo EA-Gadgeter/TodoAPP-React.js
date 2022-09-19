@@ -11,6 +11,7 @@
 
     position: fixed;
     bottom: calc(5%);
+    z-index: 1;
 
     display: flex;
     justify-content: center;
@@ -35,8 +36,15 @@
     }
 }
 
-@media (min-width: 1050px){
+@media (min-width: 1024px) {
     .CreateTodoButton{
-        bottom: calc(14.5%);
+        bottom: calc(10.5%);
+    }
+}
+
+
+@media (min-width: 1300px) {
+    .CreateTodoButton{
+        bottom: calc(14%);
     }
 }

@@ -47,7 +47,7 @@ function TodoProvider (props){
         searchedTodos = todos.filter(todo => {
             const todoText = todo.text.toLowerCase();
             const searchText = searchValue.toLowerCase();
-            return todoText.startsWith(searchText);
+            return todoText.includes(searchText);
         });
     }
 
@@ -72,7 +72,7 @@ function TodoProvider (props){
         */
         const newTodos = [...todos];
 
-        newTodos[todoIndex].isCompleted =  true; // Hacemos el cambio en la tarea a eliminar.
+        newTodos[todoIndex].isCompleted = !newTodos[todoIndex].isCompleted; // Hacemos el cambio en la tarea a eliminar.
         // Guardamos el estado de los Todos con la nueva lista
         saveTodos(newTodos);
     }
@@ -113,7 +113,7 @@ function TodoProvider (props){
                 addTodo,
                 deleteTodo,
                 openModal,
-                setOpenModal
+                setOpenModal,
             }}
         >
             {/*La siguiente línea es muy importante, es lo que nos permite
