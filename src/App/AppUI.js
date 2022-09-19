@@ -7,6 +7,7 @@ import {TodoSearch} from "../components/TodoSearch";
 import {TodoList} from "../components/TodoList";
 import {TodoItem} from "../components/TodoItem";
 import {CreateTodoButton} from "../components/CreateTodoButton";
+import {Modal} from "../components/Modal";
 
 import './App.css';
 
@@ -68,6 +69,10 @@ function AppUI() {
                     <CreateTodoButton
                         setOpenModal={setOpenModal}
                     />
+                    <Modal>
+                        <p>{searchedTodos[0]?.text}</p>
+                    </Modal>
+                    <CreateTodoButton/>
                 </div>
             </main>
         </React.Fragment>
