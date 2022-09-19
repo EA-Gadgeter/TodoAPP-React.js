@@ -5,7 +5,8 @@ function Modal ({children}) {
     return ReactDOM.createPortal(
         <div className="ModalBackground">
             {children}
-        </div>,
+        </div>
+        ,
         document.getElementById("modal")
     );
 }
