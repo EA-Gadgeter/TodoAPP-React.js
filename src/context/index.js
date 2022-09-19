@@ -19,6 +19,7 @@ function TodoProvider (props){
     */
     const [searchValue, setSearchValue] = React.useState("");
     const [openModal, setOpenModal]  = React.useState(false);
+    const [openChangeModal, setOpenChangeModal]  = React.useState("");
 
     /*
        Para poder saber la cantidad de Todos que están completos, podemos
@@ -98,6 +99,14 @@ function TodoProvider (props){
         saveTodos(newTodos);
     }
 
+    const changeTodo = (todoText, newText) => {
+        const todoIndex = todos.findIndex(todo => todo.text === todoText);
+        const newTodos = [...todos];
+        newTodos[todoIndex].text = newText;
+
+        saveTodos(newTodos);
+    };
+
     return (
         /* Creamos el proveedor de nuestro contexto, que va
         a devolver un objeto con todos los datos necesarios para
@@ -112,8 +121,11 @@ function TodoProvider (props){
                 completeTodo,
                 addTodo,
                 deleteTodo,
+                changeTodo,
                 openModal,
                 setOpenModal,
+                openChangeModal,
+                setOpenChangeModal,
             }}
         >
             {/*La siguiente línea es muy importante, es lo que nos permite

@@ -23,7 +23,7 @@ function AppUI() {
      */
     }
 
-    const {searchedTodos, completeTodo, deleteTodo, openModal, setOpenModal} = React.useContext(TodoContext);
+    const {searchedTodos, completeTodo, deleteTodo, openModal, setOpenModal, openChangeModal, setOpenChangeModal} = React.useContext(TodoContext);
 
     return (
         /*
@@ -64,13 +64,28 @@ function AppUI() {
                                 isCompleted={todo.isCompleted}
                                 completeTodo={() => completeTodo(todo.text)}
                                 deleteTodo={() => deleteTodo(todo.text)}
+                                setOpenChangeModal={setOpenChangeModal}
                             />
                         ))}
                     </TodoList>
 
                     {openModal && (
                         <Modal>
-                            <TodoForm/>
+                            <TodoForm
+                                labelText="Añade un TODO!"
+                                placeholderText="Crea tu primer TODO..."
+                                submitText="Añadir TODO"
+                            />
+                        </Modal>
+                    )}
+
+                    {openChangeModal != "" && (
+                        <Modal>
+                            <TodoForm
+                                labelText="Ingresa el TODO"
+                                placeholderText="TODO modificado..."
+                                submitText="Modificar TODO"
+                            />
                         </Modal>
                     )}
 

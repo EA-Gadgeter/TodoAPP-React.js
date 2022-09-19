@@ -1,43 +1,53 @@
 .TodoItem {
-    width: 90%;
-    max-width: 400px;
-    min-height: 3.5rem;
+  width: 90%;
+  max-width: 400px;
+  min-height: 3.5rem;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    padding: 0 2rem;
-    margin-bottom: 1.5rem;
+  padding: 0 2rem;
+  margin-bottom: 1.5rem;
 
-    background-color: white;
-    border-radius: 2rem;
-    box-shadow: 0 0.1rem 0.2rem;
+  background-color: white;
+  border-radius: 2rem;
+  box-shadow: 0 0.1rem 0.2rem;
 }
 
 .TodoItem:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .TodoItem-text {
-    font-size: 1.4rem;
-    text-align: center;
-    padding-inline: 5%;
+  font-size: 1.4rem;
+  text-align: center;
+  padding-inline: 5%;
 }
 
 .TodoItem-text--completed {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .Icon {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.Icon__modify-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*Nos permite cambiarle el color a una imagen*/
 .Icon--completed {
-    filter: opacity(0.4) drop-shadow(0 0 0 green);
+  filter: opacity(0.4) drop-shadow(0 0 0 green);
+}
+
+.Icon--delete {
+  margin-right: 0.75rem;
 }
 
 .Icon--delete:hover {
-    filter: opacity(0.7) drop-shadow(0 0 0 red);
+  filter: opacity(0.7) drop-shadow(0 0 0 red);
 }
