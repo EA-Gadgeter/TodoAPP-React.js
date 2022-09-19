@@ -1,7 +1,7 @@
 import React from "react";
 import "./TodoItem.css"
-import logoDelete from "../assets/img/delete.png";
-import logoCheck from "../assets/img/check.png"
+import logoDelete from "../../assets/img/delete.png";
+import logoCheck from "../../assets/img/check.png"
 
 function TodoItem({text, isCompleted, completeTodo, deleteTodo}) {
 

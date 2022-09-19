@@ -11,6 +11,7 @@
 
     position: fixed;
     bottom: calc(5%);
+    z-index: 1;
 
     display: flex;
     justify-content: center;
@@ -19,7 +20,31 @@
     transform: rotate(0);
     transition: .3s ease;
 }
-
 .CreateTodoButton:hover {
     transform: rotate(180deg);
+}
+
+@media (min-width: 350px){
+    .CreateTodoButton{
+        bottom: calc(8%);
+    }
+}
+
+@media (min-width: 630px){
+    .CreateTodoButton{
+        bottom: calc(9%);
+    }
+}
+
+@media (min-width: 1024px) {
+    .CreateTodoButton{
+        bottom: calc(10.5%);
+    }
+}
+
+
+@media (min-width: 1300px) {
+    .CreateTodoButton{
+        bottom: calc(14%);
+    }
 }

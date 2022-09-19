@@ -1,20 +1,30 @@
 import React from "react";
-import {TodoCounter} from "../TodoCounter";
-import {TodoSearch} from "../TodoSearch";
-import {TodoList} from "../TodoList";
-import {TodoItem} from "../TodoItem";
-import {CreateTodoButton} from "../CreateTodoButton";
+
+import {TodoContext} from "../context";
+
+import {TodoCounter} from "../components/TodoCounter";
+import {TodoSearch} from "../components/TodoSearch";
+import {TodoList} from "../components/TodoList";
+import {TodoItem} from "../components/TodoItem";
+import {CreateTodoButton} from "../components/CreateTodoButton";
+import {Modal} from "../components/Modal";
+import {TodoForm} from "../components/TodoForm";
+
 import './App.css';
 
-function AppUI({
-    totalTodos,
-    completedTodos,
-    searchValue,
-    setSearchValue,
-    searchedTodos,
-    completeTodo,
-    deleteTodo
-}) {
+function AppUI() {
+
+    {/*
+    Importamos el contexto arriba.
+
+    Podemos usar TodoContext. Consumer más una función anónima, o, como en este
+    caso, el hook useContext, el cual recibe un contexto, y de ahi extraemos los datos
+    necesarios para que funcione este componente.
+     */
+    }
+
+    const {searchedTodos, completeTodo, deleteTodo, openModal, setOpenModal} = React.useContext(TodoContext);
+
     return (
         /*
             ¿Cuál es la diferencia entre un elemento y una etiqueta HTML?
@@ -38,19 +48,13 @@ function AppUI({
             <main>
                 <div className="container">
                     <div className="search-bar">
-                        <TodoCounter
-                            totalTodos={totalTodos}
-                            completedTodos={completedTodos}
-                        />
-                        <TodoSearch
-                            searchValue={searchValue}
-                            setSearchValue={setSearchValue}
-                        />
+                        <TodoCounter/>
+                        <TodoSearch/>
                     </div>
                     <TodoList>
                         {/* En lugar de recorrer e insertar la lista de todos los Todos,
-                        lo hacemos con los de searchedTodos, que es la que varía según
-                        se va escribiendo*/}
+                                lo hacemos con los de searchedTodos, que es la que varía según
+                                se va escribiendo*/}
                         {searchedTodos.map(todo => (
                             /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
                             * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
@@ -63,7 +67,16 @@ function AppUI({
                             />
                         ))}
                     </TodoList>
-                    <CreateTodoButton/>
+
+                    {openModal && (
+                        <Modal>
+                            <TodoForm/>
+                        </Modal>
+                    )}
+
+                    <CreateTodoButton
+                        setOpenModal={setOpenModal}
+                    />
                 </div>
             </main>
         </React.Fragment>

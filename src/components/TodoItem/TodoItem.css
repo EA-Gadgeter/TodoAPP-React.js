@@ -1,6 +1,7 @@
 .TodoItem {
     width: 90%;
-    height: 3.5rem;
+    max-width: 400px;
+    min-height: 3.5rem;
 
     display: flex;
     justify-content: space-between;
@@ -14,9 +15,14 @@
     box-shadow: 0 0.1rem 0.2rem;
 }
 
+.TodoItem:last-child {
+    margin-bottom: 0;
+}
+
 .TodoItem-text {
     font-size: 1.4rem;
     text-align: center;
+    padding-inline: 5%;
 }
 
 .TodoItem-text--completed {

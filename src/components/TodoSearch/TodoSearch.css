@@ -1,5 +1,6 @@
 .TodoSearch {
     width: 80%;
+    max-width: 400px;
     height: 3rem;
 
     margin-top: 1rem;
