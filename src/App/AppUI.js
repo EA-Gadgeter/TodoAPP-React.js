@@ -11,6 +11,18 @@ import {CreateTodoButton} from "../components/CreateTodoButton";
 import './App.css';
 
 function AppUI() {
+
+    {/*
+    Importamos el contexto arriba.
+
+    Podemos usar TodoContext. Consumer más una función anónima, o, como en este
+    caso, el hook useContext, el cual recibe un contexto, y de ahi extraemos los datos
+    necesarios para que funcione este componente.
+     */
+    }
+
+    const {searchedTodos, completeTodo, deleteTodo} = React.useContext(TodoContext);
+
     return (
         /*
             ¿Cuál es la diferencia entre un elemento y una etiqueta HTML?
@@ -37,33 +49,22 @@ function AppUI() {
                         <TodoCounter/>
                         <TodoSearch/>
                     </div>
-                    {/*Importamos el contexto, y en lugar de poner nuestros componentes
-                    tal cual, primero usamos TodoContext. Consumer, dentro creamos una función
-                     anónima que precisamente va a consumir los values que declaramos en el contexto
-
-                     Los values a consumir se pasan en un objeto como parámetro, dentro de la función
-                     ahora si ponemos nuestros componentes
-                     */}
-                    <TodoContext.Consumer>
-                        {({searchedTodos, completeTodo, deleteTodo}) => (
-                            <TodoList>
-                                {/* En lugar de recorrer e insertar la lista de todos los Todos,
+                    <TodoList>
+                        {/* En lugar de recorrer e insertar la lista de todos los Todos,
                                 lo hacemos con los de searchedTodos, que es la que varía según
                                 se va escribiendo*/}
-                                {searchedTodos.map(todo => (
-                                    /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
-                                    * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
-                                    <TodoItem
-                                        key={todo.text}
-                                        text={todo.text}
-                                        isCompleted={todo.isCompleted}
-                                        completeTodo={() => completeTodo(todo.text)}
-                                        deleteTodo={() => deleteTodo(todo.text)}
-                                    />
-                                ))}
-                            </TodoList>
-                        )}
-                    </TodoContext.Consumer>
+                        {searchedTodos.map(todo => (
+                            /*Para tratar los elementos li, tenemos que declarar un Key único (pedos de React), por
+                            * ahora, vamos a usar el mismo texto, que NO SE DEBERÍA repetir*/
+                            <TodoItem
+                                key={todo.text}
+                                text={todo.text}
+                                isCompleted={todo.isCompleted}
+                                completeTodo={() => completeTodo(todo.text)}
+                                deleteTodo={() => deleteTodo(todo.text)}
+                            />
+                        ))}
+                    </TodoList>
                     <CreateTodoButton/>
                 </div>
             </main>
