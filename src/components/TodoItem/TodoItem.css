@@ -1,5 +1,6 @@
 .TodoItem {
     width: 90%;
+    max-width: 400px;
     height: 3.5rem;
 
     display: flex;
